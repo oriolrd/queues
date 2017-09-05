@@ -192,140 +192,194 @@ function addAllLinks(){
   var pripsis = pend.getRange(2, col_pripsi, pend.getLastRow()).getValues();
   for(var j = 0 ;  j < cases.length -1; j ++ ) {
     // Looking for Case Number in the Aurora column
-    var formula = pend.getRange(j+2, 1).getFormula();
-    var casenum = pend.getRange(j+2, 1).getValue();
     var i = j+2;
+    var casenum = pend.getRange(j+2, col_Aurora).getValue();
 
-    if (formula[0] != " ") {
-      // Aurora Case
+    // Aurora Case
+    var formula = pend.getRange(j+2, col_Aurora).getFormula();
+    if (formula[0] != "=") {
       var column = col_Aurora;
       var url = "https://rexis.my.salesforce.com/_ui/search/ui/UnifiedSearchResults?searchType=2&sen=a30&str=" + casenum;
       pend.getRange(i, column).setFormula('=HYPERLINK("' + url + '","' + casenum + '")');
       pend.getRange(i, column).setFontFamily("Verdana");
       pend.getRange(i, column).setFontSize(9);
       pend.getRange(i, column).setHorizontalAlignment("center");
+    }
       
-      //PRIPSI column
+    //PRIPSI column
+    var formula = pend.getRange(j+2, col_pripsi).getFormula();
+    if (formula[0] != "=") {
       var column = col_pripsi;
       pend.getRange(i, column).setFormula('=iferror(if(index(allCases!$A:$S,match($A'+i+',allCases!$A:$A,0),match("Is PRI?",allCases!$1:$1,0))="No","N",if(index(allCases!$A:$S,match($A'+i+',allCases!$A:$A,0),match("Is PRI?",allCases!$1:$1,0))="Yes","Y","")),"")');
       pend.getRange(i, column).setFontFamily("Verdana");
       pend.getRange(i, column).setFontSize(9);
       pend.getRange(i, column).setHorizontalAlignment("center");
+    }
       
-      //GCH column
+    //GCH column
+    var formula = pend.getRange(j+2, col_GCH).getFormula();
+    if (formula[0] != "=") {
       var column = col_GCH;
       pend.getRange(i, column).setFormula('=iferror(left(index(allCases!$A:$S,match($A'+i+',allCases!$A:$A,0),match("Global Case Handler",allCases!$1:$1,0)),find(" ",index(allCases!$A:$S,match($A'+i+',allCases!$A:$A,0),match("Global Case Handler",allCases!$1:$1,0)))-1),"")');
       pend.getRange(i, column).setFontFamily("Verdana");
       pend.getRange(i, column).setFontSize(9);
       pend.getRange(i, column).setHorizontalAlignment("center");
+    }
       
-      //Case Status column
+    //Case Status column
+    var formula = pend.getRange(j+2, col_caseStat).getFormula();
+    if (formula[0] != "=") {
       var column = col_caseStat;
       pend.getRange(i, column).setFormula('=iferror(index(allCases!$A:$S,match($A'+i+',allCases!$A:$A,0),match("Workflow Status",allCases!$1:$1,0)),"")');
       pend.getRange(i, column).setFontFamily("Verdana");
       pend.getRange(i, column).setFontSize(9);
       pend.getRange(i, column).setHorizontalAlignment("center");
+    }
       
-      //Software Name column
+    //Software Name column
+    var formula = pend.getRange(j+2, col_swname).getFormula();
+    if (formula[0] != "=") {
       var column = col_swname;
       pend.getRange(i, column).setFormula('=iferror(index(allCases!$A:$S,match($A'+i+',allCases!$A:$A,0),match("Software Name",allCases!$1:$1,0)),"")');
       pend.getRange(i, column).setFontFamily("Verdana");
       pend.getRange(i, column).setFontSize(9);
       pend.getRange(i, column).setHorizontalAlignment("center");
-      
-      //CIR Status column
+    }
+
+    //CIR Status column
+    var formula = pend.getRange(j+2, col_CIRstat).getFormula();
+    if (formula[0] != "=") {
       var column = col_CIRstat;
       pend.getRange(i, column).setFormula('=iferror(index(allCases!$A:$S,match($A'+i+',allCases!$A:$A,0),match("Lot Number",allCases!$1:$1,0)),"")');
       pend.getRange(i, column).setFontFamily("Verdana");
       pend.getRange(i, column).setFontSize(9);
       pend.getRange(i, column).setHorizontalAlignment("center");
-      
-      //Cause Keywords column
+    }
+
+    //Cause Keywords column
+    var formula = pend.getRange(j+2, col_casekey).getFormula();
+    if (formula[0] != "=") {
       var column = col_casekey;
       pend.getRange(i, column).setFormula('=iferror(if(index(allCases!$A:$S,match($A'+i+',allCases!$A:$A,0),match("Cause Keywords",allCases!$1:$1,0))="","",hyperlink("https://jira.swlonline.de/browse/"&index(allCases!$A:$S,match($A'+i+',allCases!$A:$A,0),match("Cause Keywords",allCases!$1:$1,0)),index(allCases!$A:$S,match($A'+i+',allCases!$A:$A,0),match("Cause Keywords",allCases!$1:$1,0)))),"")');
       pend.getRange(i, column).setFontFamily("Verdana");
       pend.getRange(i, column).setFontSize(9);
       pend.getRange(i, column).setHorizontalAlignment("center");
-      
-      //Problem Description column
+    }
+
+    //Problem Description column
+    var formula = pend.getRange(j+2, col_probdesc).getFormula();
+    if (formula[0] != "=") {
       var column = col_probdesc;
       pend.getRange(i, column).setFormula('=iferror(index(allCases!$A:$S,match($A'+i+',allCases!$A:$A,0),match("Problem Description",allCases!$1:$1,0)),"")');
       pend.getRange(i, column).setFontFamily("Verdana");
       pend.getRange(i, column).setFontSize(9);
       pend.getRange(i, column).setHorizontalAlignment("center");
-      
-      //TAT column
+    }
+
+    //TAT column
+    var formula = pend.getRange(j+2, col_TAT).getFormula();
+    if (formula[0] != "=") {
       var column = col_TAT;
       pend.getRange(i, column).setFormula('=IF(S'+i+'="",,IFERROR(DATEDIF(S'+i+',TODAY(),"D"),))');
       pend.getRange(i, column).setFontFamily("Verdana");
       pend.getRange(i, column).setFontSize(9);
       pend.getRange(i, column).setHorizontalAlignment("center");
-      
-      //Open Days column
+    }
+
+    //Open Days column
+    var formula = pend.getRange(j+2, col_OpenDays).getFormula();
+    if (formula[0] != "=") {
       var column = col_OpenDays;
       pend.getRange(i, column).setFormula('=IF(T'+i+'="",,IFERROR(DATEDIF(T'+i+',TODAY(),"D"),))');
       pend.getRange(i, column).setFontFamily("Verdana");
       pend.getRange(i, column).setFontSize(9);
       pend.getRange(i, column).setHorizontalAlignment("center");
-      
-      //Product Name column
+    }
+
+    //Product Name column
+    var formula = pend.getRange(j+2, col_prodnam).getFormula();
+    if (formula[0] != "=") {
       var column = col_prodnam;
       pend.getRange(i, column).setFormula('=iferror(index(allCases!$A:$S,match($A'+i+',allCases!$A:$A,0),match("Product Name",allCases!$1:$1,0)),"")');
       pend.getRange(i, column).setFontFamily("Verdana");
       pend.getRange(i, column).setFontSize(9);
       pend.getRange(i, column).setHorizontalAlignment("center");
-      
-      //Software Version column
+    }
+
+    //Software Version column
+    var formula = pend.getRange(j+2, col_vers).getFormula();
+    if (formula[0] != "=") {
       var column = col_vers;
       pend.getRange(i, column).setFormula('=iferror(index(allCases!$A:$S,match($A'+i+',allCases!$A:$A,0),match("Software Version",allCases!$1:$1,0)),"")');
       pend.getRange(i, column).setFontFamily("Verdana");
       pend.getRange(i, column).setFontSize(9);
       pend.getRange(i, column).setHorizontalAlignment("center");
-      
-      //First Contact column
+    }
+
+    //First Contact column
+    var formula = pend.getRange(j+2, col_fstcont).getFormula();
+    if (formula[0] != "=") {
       var column = col_fstcont;
       pend.getRange(i, column).setFormula('=iferror(date(right(index(allCases!$A:$S,match($A'+i+',allCases!$A:$A,0),match("Date of First Contact",allCases!$1:$1,0)),4),left(index(allCases!$A:$S,match($A'+i+',allCases!$A:$A,0),match("Date of First Contact",allCases!$1:$1,0)),find("/",index(allCases!$A:$S,match($A'+i+',allCases!$A:$A,0),match("Date of First Contact",allCases!$1:$1,0)))-1),MID(index(allCases!$A:$S,match($A'+i+',allCases!$A:$A,0),match("Date of First Contact",allCases!$1:$1,0)),find("/",index(allCases!$A:$S,match($A'+i+',allCases!$A:$A,0),match("Date of First Contact",allCases!$1:$1,0)))+1,len(index(allCases!$A:$S,match($A'+i+',allCases!$A:$A,0),match("Date of First Contact",allCases!$1:$1,0)))-5-find("/",index(allCases!$A:$S,match($A'+i+',allCases!$A:$A,0),match("Date of First Contact",allCases!$1:$1,0))))),date(right(index(allCases!$A:$S,match($A'+i+',allCases!$A:$A,0),match("Date of First Contact",allCases!$1:$1,0)),4),MID(index(allCases!$A:$S,match($A'+i+',allCases!$A:$A,0),match("Date of First Contact",allCases!$1:$1,0)),find(".",index(allCases!$A:$S,match($A'+i+',allCases!$A:$A,0),match("Date of First Contact",allCases!$1:$1,0)))+1,len(index(allCases!$A:$S,match($A'+i+',allCases!$A:$A,0),match("Date of First Contact",allCases!$1:$1,0)))-5-find(".",index(allCases!$A:$S,match($A'+i+',allCases!$A:$A,0),match("Date of First Contact",allCases!$1:$1,0)))),left(index(allCases!$A:$S,match($A'+i+',allCases!$A:$A,0),match("Date of First Contact",allCases!$1:$1,0)),find(".",index(allCases!$A:$S,match($A'+i+',allCases!$A:$A,0),match("Date of First Contact",allCases!$1:$1,0)))-1)))');
       pend.getRange(i, column).setFontFamily("Verdana");
       pend.getRange(i, column).setFontSize(9);
       pend.getRange(i, column).setHorizontalAlignment("center");
-      
-      //Created Date column
+    }
+
+    //Created Date column
+    var formula = pend.getRange(j+2, col_creDat).getFormula();
+    if (formula[0] != "=") {
       var column = col_creDat;
       pend.getRange(i, column).setFormula('=iferror(date(right(index(allCases!$A:$S,match($A'+i+',allCases!$A:$A,0),match("Escalated Issue: Created Date",allCases!$1:$1,0)),4),left(index(allCases!$A:$S,match($A'+i+',allCases!$A:$A,0),match("Escalated Issue: Created Date",allCases!$1:$1,0)),find("/",index(allCases!$A:$S,match($A'+i+',allCases!$A:$A,0),match("Escalated Issue: Created Date",allCases!$1:$1,0)))-1),MID(index(allCases!$A:$S,match($A'+i+',allCases!$A:$A,0),match("Escalated Issue: Created Date",allCases!$1:$1,0)),find("/",index(allCases!$A:$S,match($A'+i+',allCases!$A:$A,0),match("Escalated Issue: Created Date",allCases!$1:$1,0)))+1,len(index(allCases!$A:$S,match($A'+i+',allCases!$A:$A,0),match("Escalated Issue: Created Date",allCases!$1:$1,0)))-5-find("/",index(allCases!$A:$S,match($A'+i+',allCases!$A:$A,0),match("Escalated Issue: Created Date",allCases!$1:$1,0))))),date(right(index(allCases!$A:$S,match($A'+i+',allCases!$A:$A,0),match("Escalated Issue: Created Date",allCases!$1:$1,0)),4),MID(index(allCases!$A:$S,match($A'+i+',allCases!$A:$A,0),match("Escalated Issue: Created Date",allCases!$1:$1,0)),find(".",index(allCases!$A:$S,match($A'+i+',allCases!$A:$A,0),match("Escalated Issue: Created Date",allCases!$1:$1,0)))+1,len(index(allCases!$A:$S,match($A'+i+',allCases!$A:$A,0),match("Escalated Issue: Created Date",allCases!$1:$1,0)))-5-find(".",index(allCases!$A:$S,match($A'+i+',allCases!$A:$A,0),match("Escalated Issue: Created Date",allCases!$1:$1,0)))),left(index(allCases!$A:$S,match($A'+i+',allCases!$A:$A,0),match("Escalated Issue: Created Date",allCases!$1:$1,0)),find(".",index(allCases!$A:$S,match($A'+i+',allCases!$A:$A,0),match("Escalated Issue: Created Date",allCases!$1:$1,0)))-1)))');
       pend.getRange(i, column).setFontFamily("Verdana");
       pend.getRange(i, column).setFontSize(9);
       pend.getRange(i, column).setHorizontalAlignment("center");
-      
-      //Product Assessment column
+    }
+
+    //Product Assessment column
+    var formula = pend.getRange(j+2, col_prodAss).getFormula();
+    if (formula[0] != "=") {
       var column = col_prodAss;
       pend.getRange(i, column).setFormula('=iferror(left(index(allCases!$A:$S,match($A'+i+',allCases!$A:$A,0),match("Product Assessment(Com. Substantiated)",allCases!$1:$1,0)),find(" / ",index(allCases!$A:$S,match($A'+i+',allCases!$A:$A,0),match("Product Assessment(Com. Substantiated)",allCases!$1:$1,0)))-1),"")');
       pend.getRange(i, column).setFontFamily("Verdana");
       pend.getRange(i, column).setFontSize(9);
       pend.getRange(i, column).setHorizontalAlignment("center");
-      
-      //Prisma ID column
+    }
+
+    //Prisma ID column
+    var formula = pend.getRange(j+2, col_PRISMA).getFormula();
+    if (formula[0] != "=") {
       var column = col_PRISMA;
       pend.getRange(i, column).setFormula('=iferror(index(allCases!$A:$S,match($A'+i+',allCases!$A:$A,0),match("Prisma Case ID",allCases!$1:$1,0)),"")');
       pend.getRange(i, column).setFontFamily("Verdana");
       pend.getRange(i, column).setFontSize(9);
       pend.getRange(i, column).setHorizontalAlignment("center");
-      
-      //Country column
+    }
+
+    //Country column
+    var formula = pend.getRange(j+2, col_country).getFormula();
+    if (formula[0] != "=") {
       var column = col_country;
       pend.getRange(i, column).setFormula('=iferror(index(allCases!$A:$S,match($A'+i+',allCases!$A:$A,0),match("Prisma Country of Origin",allCases!$1:$1,0)),"")');
       pend.getRange(i, column).setFontFamily("Verdana");
       pend.getRange(i, column).setFontSize(9);
       pend.getRange(i, column).setHorizontalAlignment("center");
-      
-      //Customer column
+    }
+
+    //Customer column
+    var formula = pend.getRange(j+2, col_customer).getFormula();
+    if (formula[0] != "=") {
       var column = col_customer;
       pend.getRange(i, column).setFormula('=iferror(index(allCases!$A:$S,match($A'+i+',allCases!$A:$A,0),match("Prisma Customer ID",allCases!$1:$1,0)),"")');
       pend.getRange(i, column).setFontFamily("Verdana");
       pend.getRange(i, column).setFontSize(9);
       pend.getRange(i, column).setHorizontalAlignment("center");      
       
-      
-      //Days since Peer Review Approved
+    }
+
+    //Days since Peer Review Approved
+    var formula = pend.getRange(j+2, col_daysPRA).getFormula();
+    if (formula[0] != "=") {
       var column = col_daysPRA;
       pend.getRange(i, column).setFormula('=if(Y'+i+'<>"", iferror(datedif(Y'+i+',today(),"D"),""),"")');
       pend.getRange(i, column).setFontFamily("Verdana");
